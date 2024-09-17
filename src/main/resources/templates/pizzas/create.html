@@ -21,18 +21,29 @@
 						
 				 		<div class="mb-3">
 				   			<label for="name" class="form-label">Nome</label>
-				   			<input type="text" class="form-control" id="name" placeholder="Margherita" th:field="${pizzas.name}">
-				 		</div>
+				   			<input type="text" class="form-control" id="name" placeholder="Margherita" th:field="${pizzas.name}" th:errorClass="is-invalid">
+							<div th:if="${#fields.hasErrors('pizzas.name')}" class="invalid-feedback">
+							<ul>
+							<li th:each="err : ${#fields.errors('pizzas.name')}" th:text="${err}"></li>
+							</ul>
+							</div>
+						</div>
 						
 				 		<div class="mb-3">
 				   			<label for="description" class="form-label">Descrizione</label>
-				   			<input class="form-control" id="description" placeholder="Pizza con pomodoro, mozzarella, friarielli..."rows="3" th:field="${pizzas.description}">
+				   			<input class="form-control" id="description" placeholder="Pizza con pomodoro, mozzarella, friarielli..."rows="3" th:field="${pizzas.description}" th:errorClass="is-invalid">
+							<div th:if="${#fields.hasErrors('pizzas.description')}" class="invalid-feedback">
+							<ul>
+							<li th:each="err : ${#fields.errors('pizzas.description')}" th:text="${err}"></li>
+							</ul>
+							</div>
 				 		</div>
 						
 				 		<div class="mb-3">	
 				   			<label for="image" class="form-label">Immagine</label>
 				   			<input type="text" class="form-control" id="image" placeholder="http://..." th:field="${pizzas.image}">
-				 		</div>
+				 		
+						</div>
 						
 						<div>
 							<input type="submit" class="btn order" value="Crea">

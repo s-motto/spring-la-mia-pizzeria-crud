@@ -9,6 +9,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "pizzas")
@@ -18,12 +20,17 @@ public class Pizza {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@NotNull
+	@Size(min=4, max=20)
 	@Column(nullable=false)
 	private String name;
+	
 	
 	@Column(nullable=false)
 	private String image;
 	
+	@NotNull
+	@Size(min=10, max=250)
 	@Column(nullable=false)
 	private String description;
 	
