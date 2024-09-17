@@ -8,10 +8,15 @@ import org.lessons.java.pizzeria.repo.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/pizzas")
@@ -39,12 +44,34 @@ public class PizzaController {
 	}
 	
 	
-@GetMapping("/show/{id}")
-public String show(@PathVariable("id") Integer id, Model model) {
-	model.addAttribute("pizzas", repo.findById(id).get());
-	return "/pizzas/show";
-}
-
+	@GetMapping("/show/{id}")
+	public String show(@PathVariable("id") Integer id, Model model) {
+		model.addAttribute("pizzas", repo.findById(id).get());
+		return "/pizzas/show";
+	}
+	
+	
+	@GetMapping("/create")
+	public String create(Model model) {
+		model.addAttribute("pizzas", new Pizza());
+		return "/pizzas/create";
+	}
+	
+	@PostMapping("/create")
+	public String store(@Valid @ModelAttribute("pizzas") Pizza formPizza, 
+			            BindingResult bindingResult,
+			            Model model) 
+	{
+		if (bindingResult.hasErrors()) {
+			return "/pizzas/create";
+		}else {
+			repo.save(formPizza);
+			return "redirect:/pizzas";
+		}
+		
+		
+	}
+	
 
 //@GetMapping("/findByName/{name}")
 //public String findByName(@PathVariable("name") String name, Model model) {
