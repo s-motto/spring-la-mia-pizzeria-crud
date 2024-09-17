@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:insert="~{fragments/head-fragment :: head}" >
+		
+	</head>
+	<body>
+		<header th:insert="~{fragments/navbar-fragment :: navbar}">
+			
+		</header>
+		<main>
+		<div class="container text-center">
+			<div class=" justify-content-center ">
+			  
+					<img th:src="${pizzas.image}" class="mt-5"alt="..." height="300px">
+			     
+			        <h5 th:text="${pizzas.name}" ></h5>
+			        <p th:text="${pizzas.description}" ></p>
+					<p th:text="${pizzas.price}" ></p>
+					<a href="#" class="btn order">Ordina</a>
+			        <a th:href="@{/pizzas}" class="btn order">Torna indietro</a>
+			      
+			    </div>
+			</div>
+		</div>
+		</main>
+		<footer th:insert="~{fragments/footer-fragment :: footer}"></footer>
+	</body>

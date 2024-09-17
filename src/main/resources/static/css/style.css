@@ -1,0 +1,61 @@
+#bar{
+	font-family: "Bungee Shade", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	color: #001427;
+	font-size: 40px;
+	
+}
+
+header{
+	background-color: #F4D58D;
+	border-bottom: 5px;
+	border-color: #708D81;
+}
+
+.fntTxt{
+	font-family: "Lexend Giga", sans-serif;
+  color: #001427;
+  font-weight: bold;
+  font-style: normal;
+}
+
+.fntTxt:hover{
+	text-shadow:2px 2px  #BF0603;
+	font-size: large;
+	
+}
+
+.butt{
+	border-color: #001427;
+	
+}
+
+.butt:hover{
+	
+background-color: #BF0603;
+	
+}
+
+footer{
+	background-color: #F4D58D;
+	margin-top: 50px;
+}
+
+main{
+	font-family: "Lexend Giga", sans-serif;
+  color: #001427;
+  font-weight: bold;
+  font-style: normal;
+}
+
+h5{
+	font-weight: bolder;
+	
+}
+
+.order{
+	background-color: #BF0603;
+	border-color: #001427;
+	font-weight:  bolder;
+}
