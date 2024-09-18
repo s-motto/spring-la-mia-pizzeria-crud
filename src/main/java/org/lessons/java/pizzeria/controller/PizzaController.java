@@ -72,6 +72,15 @@ public class PizzaController {
 		
 	}
 	
+	@GetMapping("/edit/{id}")
+	public String edit(@PathVariable("id") Integer id, Model model) {
+		
+		//trovo la pizza
+		Pizza pizzaToEdit= repo.findById(id).get();
+		//lo inserisco nel model
+		model.addAttribute("pizzas", pizzaToEdit);
+		return "/pizzas/edit";
+	}
 
 //@GetMapping("/findByName/{name}")
 //public String findByName(@PathVariable("name") String name, Model model) {
