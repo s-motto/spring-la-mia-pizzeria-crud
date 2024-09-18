@@ -15,11 +15,11 @@
 			     
 			        <h5 th:text="${pizzas.name}" ></h5>
 			        <p th:text="${pizzas.description}" ></p>
-					<p th:text="${pizzas.price}" ></p>
+					<p th:text="${pizzas.price} +'€'" ></p>
 					<a href="#" class="btn order">Ordina</a>
 					<a th:href="@{/pizzas/edit/{id}(id=${pizzas.id})}" class="btn order">Modifica</a>
 					<form class="d-inline-block" th:action="@{/pizzas/delete/{id}(id=${pizzas.id})}" method="post">
-					<button type="submit" class="btn order">Elimina</button>
+					<button type="submit" class="btn order" onclick="return confirm('Vuoi davvero eliminare questa pizza?')">Elimina</button>
 				   </form>
 			        <a th:href="@{/pizzas}" class="btn order">Torna indietro</a>
 					
