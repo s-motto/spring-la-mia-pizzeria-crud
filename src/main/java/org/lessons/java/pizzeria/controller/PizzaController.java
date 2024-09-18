@@ -76,11 +76,27 @@ public class PizzaController {
 	public String edit(@PathVariable("id") Integer id, Model model) {
 		
 		//trovo la pizza
-		Pizza pizzaToEdit= repo.findById(id).get();
+		
 		//lo inserisco nel model
-		model.addAttribute("pizzas", pizzaToEdit);
+		model.addAttribute("pizzas", repo.findById(id).get());
 		return "/pizzas/edit";
 	}
+	
+	
+	@PostMapping("/edit/{id}")
+	public String update(@Valid @ModelAttribute("pizzas") Pizza updatedFormPizza, 
+            BindingResult bindingResult,
+            Model model) 
+			{
+			if (bindingResult.hasErrors()) {
+			return "/pizzas/edit";
+			}else {
+			repo.save(updatedFormPizza);
+			return "redirect:/pizzas";
+			}
+	}
+	
+
 
 //@GetMapping("/findByName/{name}")
 //public String findByName(@PathVariable("name") String name, Model model) {

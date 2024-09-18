@@ -17,7 +17,9 @@
 			        <p th:text="${pizzas.description}" ></p>
 					<p th:text="${pizzas.price}" ></p>
 					<a href="#" class="btn order">Ordina</a>
+					<a th:href="@{/pizzas/edit/{id}(id=${pizzas.id})}" class="btn order">Modifica</a>
 			        <a th:href="@{/pizzas}" class="btn order">Torna indietro</a>
+					
 			      
 			    </div>
 			</div>
