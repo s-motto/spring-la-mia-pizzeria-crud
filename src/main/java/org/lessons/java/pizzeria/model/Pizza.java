@@ -34,11 +34,10 @@ public class Pizza {
 	@Column(nullable=false)
 	private String description;
 	
+	@NotNull
 	@Column(nullable=false)
 	private double price;
 	
-	@Transient
-	private DecimalFormat formatter= new DecimalFormat("#,##0.00");
 	
 	
 	
@@ -75,21 +74,17 @@ public class Pizza {
 		this.description = description;
 	}
 
-	public String getPrice() {
-		return formatter.format(this.price) + '€';
+	public double getPrice() {
+		return price;
 	}
 
 	public void setPrice(double price) {
 		this.price = price;
 	}
 
-	public DecimalFormat getFormatter() {
-		return formatter;
-	}
+	
 
-	public void setFormatter(DecimalFormat formatter) {
-		this.formatter = formatter;
-	}
+	
 
 	
 	

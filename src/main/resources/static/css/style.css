@@ -43,6 +43,10 @@ background-color: #BF0603;
 footer{
 	background-color: #F4D58D;
 	margin-top: 50px;
+	font-family: "Lexend Giga", sans-serif;
+  color: #001427;
+  font-weight: bold;
+  font-style: normal;
 }
 
 main{

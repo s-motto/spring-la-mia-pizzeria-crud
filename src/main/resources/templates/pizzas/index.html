@@ -17,7 +17,7 @@
 					      <div class="card-body">
 					        <h5 th:text="${pizzas.name}" class="card-title"></h5>
 					        
-							<p th:text="${pizzas.price}" class="card-text"></p>
+							<p th:text="${pizzas.price} +'€'" class="card-text"></p>
 					        <a th:href="@{/pizzas/show/{id}(id=${pizzas.id})}" class="btn order">Dettagli</a>
 					      </div>
 					    </div>
