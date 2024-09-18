@@ -96,6 +96,11 @@ public class PizzaController {
 			}
 	}
 	
+	@PostMapping("/delete/{id}")
+	public String delete(@PathVariable("id") Integer id) {
+		repo.deleteById(id);
+		return"redirect:/pizzas";
+	}
 
 
 //@GetMapping("/findByName/{name}")
