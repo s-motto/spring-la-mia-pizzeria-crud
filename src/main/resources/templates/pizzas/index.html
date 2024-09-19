@@ -10,6 +10,9 @@
 		<main>
 			  
 				<div class="container text-center">
+					<th:block th:if="${successMessage !=null}">
+						<div th:replace="~{fragments/alert-fragment :: successAlert(${successMessage})}"></div>
+					</th:block>
 					<div class="row row-cols-2 justify-content-center">
 					  <div class="col-sm-6 p-5" th:each="pizzas : ${pizzas}">
 					    <div class="card">
