@@ -16,17 +16,25 @@
 			        <h5 th:text="${pizzas.name}" ></h5>
 			        <p th:text="${pizzas.description}" ></p>
 					<p th:text="${pizzas.price} +'€'" ></p>
-					<a href="#" class="btn order">Ordina</a>
-					<a th:href="@{/pizzas/edit/{id}(id=${pizzas.id})}" class="btn order">Modifica</a>
+					<thblock th:each="offerts : ${pizzas.offerts}" class="justify-text-center">
+						
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">Su questa pizza è attiva l'offerta " [[${offerts.offertTitle}]] ". L'offerta è valida dal [[${offerts.whenStart}]] e scadrà il [[${offerts.whenStart}]]</li>
+						</ul>
+						
+					</thblock>
+					<a href="#" class="btn order mb-3">Ordina</a>
+					<a th:href="@{/pizzas/edit/{id}(id=${pizzas.id})}" class="btn order mb-3">Modifica</a>
 					<form class="d-inline-block" th:action="@{/pizzas/delete/{id}(id=${pizzas.id})}" method="post">
-					<button type="submit" class="btn order" onclick="return confirm('Vuoi davvero eliminare questa pizza?')">Elimina</button>
+					<button type="submit" class="btn order mb-3" onclick="return confirm('Vuoi davvero eliminare questa pizza?')">Elimina</button>
 				   </form>
-			        <a th:href="@{/pizzas}" class="btn order">Torna indietro</a>
+			        <a th:href="@{/pizzas}" class="btn order mb-3">Torna indietro</a>
 					
 			      
 			    </div>
 			</div>
 		</div>
+		
 		</main>
 		<footer th:insert="~{fragments/footer-fragment :: footer}"></footer>
 	</body>

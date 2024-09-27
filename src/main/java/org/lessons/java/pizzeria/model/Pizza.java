@@ -1,14 +1,20 @@
 package org.lessons.java.pizzeria.model;
 
-import java.text.DecimalFormat;
 
+
+import java.util.List;
+
+import org.hibernate.annotations.Formula;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
+
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -40,8 +46,18 @@ public class Pizza {
 	
 	
 	
+	@OneToMany(mappedBy="pizza", cascade= {CascadeType.REMOVE})
+	@Formula("(select * " +
+	         "from pizzas p " +
+			  "left outer join offerts o " +
+	           "on p.id = o.pizza_id " +
+			    "where p.id = id)")
+	private List<Offert> offerts;
+	
+	
 	
 	//getter e setter
+	
 	public Integer getId() {
 		return id;
 	}
@@ -81,6 +97,18 @@ public class Pizza {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
+	public List<Offert> getOfferts() {
+		return offerts;
+	}
+
+	public void setOfferts(List<Offert> offerts) {
+		this.offerts = offerts;
+	}
+
+	
+
+	
 
 	
 
