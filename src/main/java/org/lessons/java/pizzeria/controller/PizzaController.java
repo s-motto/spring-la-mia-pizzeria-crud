@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.lessons.java.pizzeria.model.Pizza;
 import org.lessons.java.pizzeria.repo.PizzaRepository;
+import org.lessons.java.pizzeria.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +25,7 @@ import jakarta.validation.Valid;
 public class PizzaController {
 	
 	@Autowired
-	private PizzaRepository repo;
+	private PizzaService service;
 	
 	@GetMapping
 	public String index(Model model, @RequestParam(name="name", required=false) String name) {
@@ -34,9 +35,9 @@ public class PizzaController {
 		List<Pizza> pizzas;
 		
 		if (name!=null && !name.isEmpty()) {
-			pizzas=repo.findByNameContaining(name);
+			pizzas=service.findByNameContaining(name);
 		} else {
-			pizzas=repo.findAll();
+			pizzas=service.findAll();
 		}
 		// li inserisco nel modello
 		model.addAttribute("pizzas", pizzas);
@@ -47,7 +48,7 @@ public class PizzaController {
 	
 	@GetMapping("/show/{id}")
 	public String show(@PathVariable("id") Integer id, Model model) {
-		model.addAttribute("pizzas", repo.findById(id).get());
+		model.addAttribute("pizzas", service.getById(id));
 		return "/pizzas/show";
 	}
 	
@@ -67,7 +68,7 @@ public class PizzaController {
 		if (bindingResult.hasErrors()) {
 			return "/pizzas/create";
 		}else {
-			repo.save(formPizza);
+			service.create(formPizza);
 			attributes.addFlashAttribute("successMessage",  "La pizza "+ formPizza.getName() + " è stata aggiunta con successo");
 			return "redirect:/pizzas";
 		}
@@ -81,7 +82,7 @@ public class PizzaController {
 		//trovo la pizza
 		
 		//lo inserisco nel model
-		model.addAttribute("pizzas", repo.findById(id).get());
+		model.addAttribute("pizzas", service.getById(id));
 		return "/pizzas/edit";
 	}
 	
@@ -95,7 +96,7 @@ public class PizzaController {
 			if (bindingResult.hasErrors()) {
 			return "/pizzas/edit";
 			}else {
-			repo.save(updatedFormPizza);
+			service.update(updatedFormPizza);
 			attributes.addFlashAttribute("successMessage",  "La pizza "+ updatedFormPizza.getName() + " è stata modificata con successo");
 			return "redirect:/pizzas";
 			}
@@ -104,7 +105,7 @@ public class PizzaController {
 	@PostMapping("/delete/{id}")
 	public String delete(@PathVariable("id") Integer id,
 			RedirectAttributes attributes) {
-		repo.deleteById(id);
+		service.deleteById(id);
 		attributes.addFlashAttribute("successMessage",  "La pizza è stata cancellata con successo");
 		return"redirect:/pizzas";
 	}
