@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:insert="~{fragments/head-fragment :: head}")>
+	</head>
+	
+	<body>
+	<header th:insert="~{fragments/navbar-fragment :: navbar}"></header>	
+	
+	<main class="container mt-5">
+		<h3 class="text-center mb-2">Modifica la tua pizza</h3>
+		
+		
+		<div class="row justify-content-center">
+			
+			<div class="col-6">
+				<form 
+					id="pizza-form"
+					
+					th:action="@{/pizzas/edit/{id}(id=${pizzas.id})}" 
+					method="post">
+						
+				 		<div class="mb-3">
+				   			<label for="name" class="form-label">Nome</label>
+				   			<input type="text" class="form-control" id="name" placeholder="Margherita" th:field="${pizzas.name}" th:errorClass="is-invalid">
+							<div th:if="${#fields.hasErrors('pizzas.name')}" class="invalid-feedback">
+							<ul>
+							<li th:each="err : ${#fields.errors('pizzas.name')}" th:text="${err}"></li>
+							</ul>
+							</div>
+						</div>
+						
+				 		<div class="mb-3">
+				   			<label for="description" class="form-label">Descrizione</label>
+				   			<input  type="text"   class="form-control" id="description" placeholder="Pizza con pomodoro, mozzarella, friarielli..."rows="3" th:field="${pizzas.description}" th:errorClass="is-invalid">
+							<div th:if="${#fields.hasErrors('pizzas.description')}" class="invalid-feedback">
+							<ul>
+							<li th:each="err : ${#fields.errors('pizzas.description')}" th:text="${err}"></li>
+							</ul>
+							</div>
+				 		</div>
+						
+						<div class="mb-3">
+				   			<label for="price" class="form-label">Prezzo</label>
+				   			<input type="number" step="0.01"  class="form-control" id="price" placeholder="2.50" th:field="${pizzas.price}" th:errorClass="is-invalid">
+							<div th:if="${#fields.hasErrors('pizzas.description')}" class="invalid-feedback">
+							<ul>
+							<li th:each="err : ${#fields.errors('pizzas.price')}" th:text="${err}"></li>
+							</ul>
+							</div>
+				 		</div>
+						
+				 		<div class="mb-3">	
+				   			<label for="image" class="form-label">Immagine</label>
+				   			<input type="text" class="form-control" id="image" placeholder="http://..." th:field="${pizzas.image}">
+				 		
+						</div>
+						
+						<div>
+							<input type="submit" class="btn order" value="Crea">
+							<input type="reset" class="btn order" value="Reset">
+						</div>
+				</form>
+			</div>
+		</div>
+	</main>
+	
+	<footer th:insert="~{fragments/footer-fragment :: footer}"></footer>
+	</body>
+</html>

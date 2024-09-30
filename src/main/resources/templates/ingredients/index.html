@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:insert="~{fragments/head-fragment :: head}" >
+		
+	</head>
+	<body>
+		<header th:insert="~{fragments/navbar-fragment :: navbar}">
+			
+		</header>
+		<main>
+			  
+				<div class="container text-center">
+					<th:block th:if="${successMessage !=null}">
+						<div th:replace="~{fragments/alert-fragment :: successAlert(${successMessage})}"></div>
+					</th:block>
+					<div class="row row-cols-2 justify-content-center">
+					  <div class="col-sm-6 p-5" th:each="ingredient : ${ingredients}">
+					    <div class="card">
+							<img th:src="${ingredient.image}" class="mt-5"alt="..." height="250px">
+					      <div class="card-body">
+					        <h5 th:text="${ingredient.name}" class="card-title"></h5>
+					        
+							<p th:text="${ingredient.price} +'€'" class="card-text"></p>
+					        <a th:href="@{/ingredients/show/{id}(id=${ingredient.id})}" class="btn order">Dettagli</a>
+					      </div>
+					    </div>
+					</div>
+				</div>
+		</main>
+		<footer th:insert="~{fragments/footer-fragment :: footer}"></footer>
+	</body>

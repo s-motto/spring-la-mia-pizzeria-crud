@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:insert="~{fragments/head-fragment :: head}" >
+		
+	</head>
+	<body>
+		<header th:insert="~{fragments/navbar-fragment :: navbar}">
+			
+		</header>
+		<main>
+		<div class="container text-center">
+			<div class=" justify-content-center ">
+			  
+					<img th:src="${ingredients.image}" class="mt-5"alt="..." height="250px">
+			     
+			        <h5 th:text="${ingredients.name}" ></h5>
+			        <p th:text="${ingredients.description}" ></p>
+					<p th:text="${ingredients.price} +'€'" ></p>
+					<div class="mb-3">
+			   			<label for="price" class="form-label">Quantità</label>
+			   			<input type="number" step="1"  class="form-control col-2" id="price" placeholder="0" th:field="${ingredients.quantity}" th:errorClass="is-invalid">
+						<div th:if="${#fields.hasErrors('ingredients.quantity')}" class="invalid-feedback">
+						<ul>
+						<li th:each="err : ${#fields.errors('ingredients.quantity')}" th:text="${err}"></li>
+						</ul>
+						</div>
+			 		</div>
+					<a href="#" class="btn order mb-3">Aggiungi</a>
+					<a th:href="@{/ingredients/edit/{id}(id=${ingredients.id})}" class="btn order mb-3">Modifica</a>
+					<form class="d-inline-block" th:action="@{/ingredients/delete/{id}(id=${ingredients.id})}" method="post">
+					<button type="submit" class="btn order mb-3" onclick="return confirm('Vuoi davvero eliminare questo ingrediente?')">Elimina</button>
+				   </form>
+			        <a th:href="@{/ingredients}" class="btn order mb-3">Torna indietro</a>
+					
+			      
+			    </div>
+			</div>
+		</div>
+		
+		</main>
+		<footer th:insert="~{fragments/footer-fragment :: footer}"></footer>
+	</body>

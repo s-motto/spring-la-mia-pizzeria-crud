@@ -24,6 +24,7 @@
 						
 					</thblock>
 					<a href="#" class="btn order mb-3">Ordina</a>
+					<a th:href="@{/ingredients/index}" class="btn order mb-3">Aggiungi ingredienti</a>
 					<a th:href="@{/pizzas/edit/{id}(id=${pizzas.id})}" class="btn order mb-3">Modifica</a>
 					<form class="d-inline-block" th:action="@{/pizzas/delete/{id}(id=${pizzas.id})}" method="post">
 					<button type="submit" class="btn order mb-3" onclick="return confirm('Vuoi davvero eliminare questa pizza?')">Elimina</button>
