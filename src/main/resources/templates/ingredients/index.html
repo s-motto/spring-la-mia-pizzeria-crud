@@ -8,7 +8,8 @@
 			
 		</header>
 		<main>
-			  
+			<a class="btn order" th:href="@{/ingredients/create}">Crea un nuovo ingrediente
+			</a>
 				<div class="container text-center">
 					<th:block th:if="${successMessage !=null}">
 						<div th:replace="~{fragments/alert-fragment :: successAlert(${successMessage})}"></div>

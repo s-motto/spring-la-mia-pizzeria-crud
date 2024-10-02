@@ -57,12 +57,12 @@ public class IngredientController {
 	
 	@GetMapping("/create")
 	public String create(Model model ) {
-		model.addAttribute(new Ingredient());
+		model.addAttribute("ingredients", new Ingredient());
 		return "/ingredients/create";
 	}
 	
 	@PostMapping("/create")
-	public String store(@Valid @ModelAttribute("igredients") Ingredient formIngredient, 
+	public String store(@Valid @ModelAttribute("ingredients") Ingredient formIngredient, 
 			            BindingResult bindingResult,
 			            Model model,
 			            RedirectAttributes attributes) 
@@ -72,7 +72,7 @@ public class IngredientController {
 		}else {
 			service.create(formIngredient);
 			attributes.addFlashAttribute("successMessage",  "L'ingrediente "+ formIngredient.getName() + " è stato aggiunto con successo");
-			return "redirect:/ingredients";
+			return "redirect:/ingredients/index";
 		}
 		
 		
@@ -99,7 +99,7 @@ public class IngredientController {
 			}else {
 			service.update(updatedFormIngredient);
 			attributes.addFlashAttribute("successMessage",  "L'ingrediente "+ updatedFormIngredient.getName() + " è stato modificato con successo");
-			return "redirect:/ingredients";
+			return "redirect:/ingredients/index";
 			}
 	}
 	

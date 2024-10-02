@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.lessons.java.pizzeria.model.Pizza;
 import org.lessons.java.pizzeria.repo.PizzaRepository;
+import org.lessons.java.pizzeria.service.IngredientService;
 import org.lessons.java.pizzeria.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,9 @@ public class PizzaController {
 	
 	@Autowired
 	private PizzaService service;
+	
+	@Autowired
+	private IngredientService ingredientService;
 	
 	@GetMapping
 	public String index(Model model, @RequestParam(name="name", required=false) String name) {
@@ -56,6 +60,7 @@ public class PizzaController {
 	@GetMapping("/create")
 	public String create(Model model) {
 		model.addAttribute("pizzas", new Pizza());
+		model.addAttribute("ingredients", ingredientService.findAll());
 		return "/pizzas/create";
 	}
 	
@@ -66,6 +71,7 @@ public class PizzaController {
 			            RedirectAttributes attributes) 
 	{
 		if (bindingResult.hasErrors()) {
+			model.addAttribute("ingredients", ingredientService.findAll());
 			return "/pizzas/create";
 		}else {
 			service.create(formPizza);
@@ -83,6 +89,7 @@ public class PizzaController {
 		
 		//lo inserisco nel model
 		model.addAttribute("pizzas", service.getById(id));
+		model.addAttribute("ingredients", ingredientService.findAll());
 		return "/pizzas/edit";
 	}
 	
@@ -94,6 +101,7 @@ public class PizzaController {
             RedirectAttributes attributes) 
 			{
 			if (bindingResult.hasErrors()) {
+				model.addAttribute("ingredients", ingredientService.findAll());
 			return "/pizzas/edit";
 			}else {
 			service.update(updatedFormPizza);

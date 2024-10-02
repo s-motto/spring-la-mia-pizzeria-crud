@@ -56,6 +56,19 @@
 						</div>
 						
 						<div>
+							<h6>Ingredienti aggiuntivi</h6>
+							<div class="form-check" th:each="ingredient : ${ingredients}">
+								
+									<input class="form-check-input" type="checkbox" th:value="${ingredient.id}" th:id="|ingredient_${ingredient.id}|" th:field="${pizzas.ingredients}" >
+									  <label class="form-check-label" th:for="|ingredient_${ingredient.id}|" th:text="${ingredient.name}">
+								
+									  </label>
+							
+							  
+							</div>
+						</div>
+						
+						<div>
 							<input type="submit" class="btn order" value="Crea">
 							<input type="reset" class="btn order" value="Reset">
 						</div>

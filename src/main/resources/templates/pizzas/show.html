@@ -15,6 +15,12 @@
 			     
 			        <h5 th:text="${pizzas.name}" ></h5>
 			        <p th:text="${pizzas.description}" ></p>
+					<thblock th:if="${pizzas.ingredients.size()} > 0" >
+					<h6>Ingredienti aggiuntivi:</h6>
+					<ul th:each="ingredient : ${pizzas.ingredients}">
+						<li th:text="${ingredient.name}"></li>
+					</ul>
+					</thblock>
 					<p th:text="${pizzas.price} +'€'" ></p>
 					<thblock th:each="offerts : ${pizzas.offerts}" class="justify-text-center">
 						

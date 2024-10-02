@@ -30,7 +30,7 @@
 					<form class="d-inline-block" th:action="@{/ingredients/delete/{id}(id=${ingredients.id})}" method="post">
 					<button type="submit" class="btn order mb-3" onclick="return confirm('Vuoi davvero eliminare questo ingrediente?')">Elimina</button>
 				   </form>
-			        <a th:href="@{/ingredients}" class="btn order mb-3">Torna indietro</a>
+			        <a th:href="@{/ingredients/index}" class="btn order mb-3">Torna indietro</a>
 					
 			      
 			    </div>
